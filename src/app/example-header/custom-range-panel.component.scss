@@ -1,5 +1,5 @@
 $width: 164px;
-$height:268px;
+$height:322px;
 :host {
   position: absolute;
   top:0px;
@@ -35,3 +35,8 @@ $height:268px;
   font-weight: bold !important;
 }
 
+#time-picker{
+  bottom:24px;
+  position: absolute;
+  left:-250px;
+}

@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CustomRangePanelComponent } from './example-header/custom-range-panel.component';
 import { ExampleHeaderComponent } from './example-header/example-header.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ExampleHeaderComponent } from './example-header/example-header.componen
     MatIconModule,
     MatButtonModule,
     MatCardModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
