@@ -1,0 +1,12 @@
+<mat-card class="mat-elevation-z3">
+  <button
+    *ngFor="let item of customPresets"
+    mat-button
+    color="primary"
+    (click)="selectRange(item)"
+    [ngClass]="{'custom-range-btn': item === 'Custom range'}"
+    [id]="replaceSpacesWithHyphens(item)"
+  >
+    {{ item }}
+  </button>
+</mat-card>
