@@ -44,6 +44,14 @@ export class AppComponent {
     return formattedDate;
   }
 
+  startDateChange = () =>{
+    console.log("change listen")
+  }
+
+  endDateChange = () =>{
+    console.log("change bear")
+  }
+
   public parseRange = () =>{
     const start = this.getDateFormat(this.range.value.start);
     const end = this.getDateFormat(this.range.value.end);
