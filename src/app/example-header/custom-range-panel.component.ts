@@ -57,7 +57,8 @@ export class CustomRangePanelComponent<D> {
     if(this.getGlobalValue()){
       const ref:any = document.querySelector(`#${this.replaceSpacesWithHyphens(this.getGlobalValue())}`);
       ref.style.backgroundColor = "blue"
-      // this.applyClassOrStyleOnce();
+      const textElement = ref.querySelectorAll("span");
+      textElement[0].style.color='white'
     }
   }
   // called when user selects a range preset:
@@ -75,6 +76,8 @@ export class CustomRangePanelComponent<D> {
     const ref:any = document.querySelector(`#${this.replaceSpacesWithHyphens(id)}`);
     if(ref){
       ref.style.backgroundColor=type;
+      const textElement = ref.querySelectorAll("span");
+      textElement[0].style.color='white'
     }
   }
 
