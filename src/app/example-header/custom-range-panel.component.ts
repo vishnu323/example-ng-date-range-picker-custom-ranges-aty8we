@@ -29,6 +29,7 @@ export class CustomRangePanelComponent<D> {
   @HostBinding('class.touch-ui')
   readonly isTouchUi = this.picker.touchUi;
   public todayVar: boolean = true;
+  public timeValue: any;
 
   constructor(
     private dateAdapter: DateAdapter<D>,
@@ -36,7 +37,7 @@ export class CustomRangePanelComponent<D> {
     private globalValueService: GlobalValueService
     
   ) {
-   
+   this.timeValue = this.globalValueService.getFromTimeValue();
   }
 
   updateGlobalValue(newValue: any) {
@@ -47,6 +48,7 @@ export class CustomRangePanelComponent<D> {
   getGlobalValue() {
     return this.globalValueService.getGlobalValue();
   }
+
 
   applyClassOrStyleOnce() {
     const ref:any = document.querySelector(`#Today`);
@@ -91,21 +93,32 @@ export class CustomRangePanelComponent<D> {
       return inputString.replace(/ /g, '-');
     }
   
+  updateFromToTime(start,end){
+    const startFormat = this.globalValueService.formatTime(start);
+    const endFormat = this.globalValueService.formatTime(end);
+    this.globalValueService.setFromTimeValue(startFormat);
+    this.globalValueService.setToTimeValue(endFormat)
+  }
 
-  private calculateDateRange(rangeName: CustomPreset): [start: D, end: D] {
+  private calculateDateRange(rangeName: CustomPreset): [start: any, end: any] {
     const today = this.today;
     const year = this.dateAdapter.getYear(today);
     this.idSelector(rangeName);
     switch (rangeName) {
       case 'Last 1 Hour':
-        return [today, today];
+        const [start,end] = this.globalValueService.getHourDate(1);
+        this.updateFromToTime(start,end)
+        return [start, end];
       case 'Last 6 Hour': {
-        const start = this.dateAdapter.addCalendarDays(today, -1);
-        return [today, today];
+        const [start,end] = this.globalValueService.getHourDate(6);
+        this.updateFromToTime(start,end)
+        
+        return [start, end];
       }
       case 'Last 24 Hour': {
-        const start = this.dateAdapter.addCalendarDays(today, -1);
-        return [today, today];
+        const [start,end] = this.globalValueService.getHourDate(24);
+        this.updateFromToTime(start,end)
+        return [start, end];
       }
       case 'Last 7 days': {
         const start = this.dateAdapter.addCalendarDays(today, -6);

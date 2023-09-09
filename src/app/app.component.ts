@@ -23,11 +23,6 @@ export class AppComponent {
   ){
     
   }
-
-
-
-  
-  
   public handleDateRangeInputClick =() =>{
     this.datePicker.open();
   }
