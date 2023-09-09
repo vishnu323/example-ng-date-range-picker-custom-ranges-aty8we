@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { CustomRangePanelComponent } from './example-header/custom-range-panel.component';
 import { ExampleHeaderComponent } from './example-header/example-header.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { DatePipe } from '@angular/common'; 
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatCardModule,
     NgxMaterialTimepickerModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
