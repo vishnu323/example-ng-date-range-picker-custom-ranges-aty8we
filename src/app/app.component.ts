@@ -16,18 +16,12 @@ export class AppComponent {
   // make ExampleHeaderComponent type available in our template:
   readonly ExampleHeaderComponent = ExampleHeaderComponent;
   @ViewChild('picker') datePicker: MatDateRangePicker<Date>;
-  @ViewChild('picker2') datePicker2: MatDateRangePicker<Date>;
-
-  activeDatePicker: string | null = null;
 
   constructor(){
     
   }
 
-  onDatePickerClick(pickerName: string) {
-    this.activeDatePicker = pickerName;
-    console.log(this.activeDatePicker)
-  }
+
 
   
   
@@ -35,13 +29,7 @@ export class AppComponent {
     this.datePicker.open();
   }
 
-  public handleDateRangeInputClick2 =() =>{
-    this.datePicker2.open();
-  }
-
-
-
-
+  
   range = new FormGroup({
     start: new FormControl(new Date()),
     end: new FormControl(new Date()),

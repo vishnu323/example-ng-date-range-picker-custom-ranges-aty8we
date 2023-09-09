@@ -3,8 +3,9 @@ import { DateAdapter } from '@angular/material/core';
 import { MatDateRangePicker } from '@angular/material/datepicker';
 import { GlobalValueService } from '../global-value.service';
 const customPresets = [
-  'Today',
-  'Yesterday',
+  'Last 1 Hour',
+  'Last 6 Hour',
+  'Last 24 Hour',
   'Last 7 days',
   'Last 30 days',
   'Last 90 days',
@@ -93,15 +94,19 @@ export class CustomRangePanelComponent<D> {
     const year = this.dateAdapter.getYear(today);
     this.idSelector(rangeName);
     switch (rangeName) {
-      case 'Today':
+      case 'Last 1 Hour':
         return [today, today];
-      case 'Yesterday': {
+      case 'Last 6 Hour': {
         const start = this.dateAdapter.addCalendarDays(today, -1);
-        return [start, today];
+        return [today, today];
+      }
+      case 'Last 24 Hour': {
+        const start = this.dateAdapter.addCalendarDays(today, -1);
+        return [today, today];
       }
       case 'Last 7 days': {
         const start = this.dateAdapter.addCalendarDays(today, -6);
-        return [start, today];
+        return [today, today];
       }
       case 'Last 30 days':{
         const end = today;
