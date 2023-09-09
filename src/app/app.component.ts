@@ -46,10 +46,10 @@ export class AppComponent {
     const value = this.globalValueService.getGlobalValue()
     const startRef = document.querySelector('.mat-date-range-input-start-wrapper');
     const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
-    if(value ==="Last 1 Hour"){
-      console.log("vishnu123",startRef.textContent)
-      startRef.textContent="hello"
-    }
+    // if(value ==="Last 1 Hour"){
+    //   console.log("vishnu123",startRef.textContent)
+    //   startRef.textContent="hello"
+    // }
     
   }
 

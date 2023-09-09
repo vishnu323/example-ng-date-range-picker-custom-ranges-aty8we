@@ -100,6 +100,15 @@ export class CustomRangePanelComponent<D> {
     this.globalValueService.setToTimeValue(endFormat)
   }
 
+  attachLabel(){
+    const startRef = document.querySelector('.mat-date-range-input-start-wrapper');
+    const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
+    startRef.textContent = startRef.textContent + 
+    " " + this.globalValueService.getFromTimeValue()
+    endRef.textContent = endRef.textContent + " " + this.globalValueService.getToTimeValue()
+
+  }
+
   private calculateDateRange(rangeName: CustomPreset): [start: any, end: any] {
     const today = this.today;
     const year = this.dateAdapter.getYear(today);
@@ -112,7 +121,7 @@ export class CustomRangePanelComponent<D> {
       case 'Last 6 Hour': {
         const [start,end] = this.globalValueService.getHourDate(6);
         this.updateFromToTime(start,end)
-        
+        this.attachLabel()
         return [start, end];
       }
       case 'Last 24 Hour': {
@@ -121,17 +130,21 @@ export class CustomRangePanelComponent<D> {
         return [start, end];
       }
       case 'Last 7 days': {
+        const end = today;
         const start = this.dateAdapter.addCalendarDays(today, -6);
+        this.updateFromToTime(start,end)
         return [today, today];
       }
       case 'Last 30 days':{
         const end = today;
         const start = this.dateAdapter.addCalendarDays(today, -30);
+        this.updateFromToTime(start,end)
         return [start, end];
       }
       case 'Last 90 days': {
         const end = today;
         const start = this.dateAdapter.addCalendarDays(today, -90);
+        this.updateFromToTime(start,end)
         return [start, end];
       }
       case 'Custom range':{
