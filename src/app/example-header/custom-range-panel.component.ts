@@ -21,6 +21,8 @@ type CustomPreset = typeof customPresets[number];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomRangePanelComponent<D> {
+
+ 
   // list of range presets we want to provide:
   readonly customPresets = customPresets;
   @HostBinding('class.touch-ui')
@@ -33,6 +35,7 @@ export class CustomRangePanelComponent<D> {
     private globalValueService: GlobalValueService
     
   ) {
+   
   }
 
   updateGlobalValue(newValue: any) {

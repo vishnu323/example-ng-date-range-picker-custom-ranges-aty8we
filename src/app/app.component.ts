@@ -9,13 +9,38 @@ import { MatDateRangePicker ,MatDatepickerInputEvent} from '@angular/material/da
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+
+
+  
+  
   // make ExampleHeaderComponent type available in our template:
   readonly ExampleHeaderComponent = ExampleHeaderComponent;
   @ViewChild('picker') datePicker: MatDateRangePicker<Date>;
-  public handleDateRangeInputClick =() =>{
-    this.datePicker.open();
+  @ViewChild('picker2') datePicker2: MatDateRangePicker<Date>;
+
+  activeDatePicker: string | null = null;
+
+  constructor(){
     
   }
+
+  onDatePickerClick(pickerName: string) {
+    this.activeDatePicker = pickerName;
+    console.log(this.activeDatePicker)
+  }
+
+  
+  
+  public handleDateRangeInputClick =() =>{
+    this.datePicker.open();
+  }
+
+  public handleDateRangeInputClick2 =() =>{
+    this.datePicker2.open();
+  }
+
+
+
 
   range = new FormGroup({
     start: new FormControl(new Date()),
