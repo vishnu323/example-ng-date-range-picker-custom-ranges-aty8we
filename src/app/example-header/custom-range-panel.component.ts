@@ -53,6 +53,13 @@ export class CustomRangePanelComponent<D> {
   applyClassOrStyleOnce() {
     const ref:any = document.querySelector(`#Today`);
     ref.style.backgroundColor = "blue"
+    
+  }
+  resetbackGround(){
+    const ref:any = document.querySelector(`#${this.replaceSpacesWithHyphens(this.getGlobalValue())}`);
+    ref.style.backgroundColor = "unset"
+    const textElement = ref.querySelectorAll("span");
+    textElement[0].style.color='unset'
   }
 
   ngAfterViewInit() {
@@ -65,6 +72,7 @@ export class CustomRangePanelComponent<D> {
   }
   // called when user selects a range preset:
   selectRange(rangeName: CustomPreset): void {
+    this.resetbackGround();
     const [start, end] = this.calculateDateRange(rangeName);
     this.picker.select(start);
     this.picker.select(end);
@@ -85,6 +93,7 @@ export class CustomRangePanelComponent<D> {
 
 
   idSelector = (id:string) =>{
+      
       this.setBackGround(id,"blue");
       this.updateGlobalValue(id);
   }
