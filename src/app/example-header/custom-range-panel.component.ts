@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { MatDateRangePicker } from '@angular/material/datepicker';
 import { GlobalValueService } from '../global-value.service';
+import { Subscription } from 'rxjs';
 const customPresets = [
   'Last 1 Hour',
   'Last 6 Hour',
@@ -30,6 +31,8 @@ export class CustomRangePanelComponent<D> {
   readonly isTouchUi = this.picker.touchUi;
   public todayVar: boolean = true;
   public timeValue: any;
+  private globalDataSubscription: Subscription;
+  public globalInfoVar:string;
 
   constructor(
     private dateAdapter: DateAdapter<D>,
@@ -39,6 +42,18 @@ export class CustomRangePanelComponent<D> {
   ) {
    this.timeValue = this.globalValueService.getFromTimeValue();
   }
+ 
+  ngOnInit() {
+    this.globalDataSubscription = this.globalValueService.globalValueData$.subscribe(data => {
+      
+      this.globalInfoVar = data;
+     
+    });
+  }
+
+  ngOnDestroy() {
+    this.globalDataSubscription.unsubscribe();
+  }
 
   updateGlobalValue(newValue: any) {
     this.globalValueService.setGlobalValue(newValue);
@@ -46,7 +61,7 @@ export class CustomRangePanelComponent<D> {
 
   // Example of getting the global value
   getGlobalValue() {
-    return this.globalValueService.getGlobalValue();
+    return this.globalInfoVar;
   }
 
 

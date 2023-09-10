@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalValueService {
-  private globalValue: string= "Last 1 Hour";
+  private globalValue = new BehaviorSubject<string>("Last 1 Hour");
+  globalValueData$ = this.globalValue.asObservable();
   private fromTimeStr : any =this.formatTime(this.getHourDate(1)[0]);
   private toTimeStr : any =this.formatTime(this.getHourDate(1)[1]);
   private startDate : any = new Date();
@@ -19,7 +21,7 @@ export class GlobalValueService {
   }
   
   setGlobalValue(value: any) {
-    this.globalValue = value;
+    this.globalValue.next(value)
   }
 
   getFromTimeValue(){
