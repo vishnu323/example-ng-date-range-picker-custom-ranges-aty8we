@@ -30,7 +30,6 @@ export class AppComponent {
   ngOnInit() {
     this.attachFromtime()
     this.attachTotime()
-    
   }
   
   range = new FormGroup({
@@ -55,10 +54,16 @@ export class AppComponent {
     const endDate = this.range.get('end').value;
     if(startDate){
       this.attachFromtime();
+    }else{
+      this.removeElement("start-element")
     }
     if(endDate){
-      this.attachTotime()
+      this.attachTotime();
+    }else{
+      this.removeElement("end-element")
     }
+    
+    
   }
 
  

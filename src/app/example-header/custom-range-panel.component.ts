@@ -142,7 +142,7 @@ export class CustomRangePanelComponent<D> {
     startelement.innerText = this.globalValueService.getFromTimeValue();
     startRef.appendChild(startelement)
   }
-  
+
   attachTotime(){
     const endid = 'end-element';
     const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
@@ -206,6 +206,7 @@ export class CustomRangePanelComponent<D> {
         return [start, end];
       }
       case 'Custom range':{
+        console.log("vishnu456")
         const start = today;
         this.updateFromToTime(start,start)
         this.removeElement("start-element")
