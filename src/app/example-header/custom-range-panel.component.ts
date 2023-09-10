@@ -132,6 +132,26 @@ export class CustomRangePanelComponent<D> {
     }
   }
 
+  attachFromtime(){
+    const startid = 'start-element';
+    const startRef = document.querySelector('.mat-date-range-input-start-wrapper');
+    this.removeElement(startid);
+    const startelement = document.createElement("div");
+    startelement.setAttribute("id",startid)
+    startelement.innerText = this.globalValueService.getFromTimeValue();
+    startRef.appendChild(startelement)
+  }
+  attachTotime(){
+    const endid = 'end-element';
+    const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
+    this.removeElement(endid)
+    const endelement = document.createElement("div");
+    endelement.setAttribute("id",endid)
+    endelement.innerText = this.globalValueService.getToTimeValue();
+    endRef.appendChild(endelement)
+  }
+
+
   attachLabel(){
     const startid = 'start-element';
     const endid = 'end-element';
@@ -163,39 +183,45 @@ export class CustomRangePanelComponent<D> {
       case 'Last 1 Hour':
         const [start,end] = this.globalValueService.getHourDate(1);
         this.updateFromToTime(start,end)
-        this.attachLabel()
+        this.attachFromtime()
+        this.attachTotime()
         return [start, end];
       case 'Last 6 Hour': {
         const [start,end] = this.globalValueService.getHourDate(6);
         this.updateFromToTime(start,end)
-        this.attachLabel()
+        this.attachFromtime()
+        this.attachTotime()
         return [start, end];
       }
       case 'Last 24 Hour': {
         const [start,end] = this.globalValueService.getHourDate(24);
         this.updateFromToTime(start,end)
-        this.attachLabel()
+        this.attachFromtime()
+        this.attachTotime()
         return [start, end];
       }
       case 'Last 7 days': {
         const end = today;
         const start = this.dateAdapter.addCalendarDays(today, -6);
         this.updateFromToTime(start,end)
-        this.attachLabel()
+        this.attachFromtime()
+        this.attachTotime()
         return [start, today];
       }
       case 'Last 30 days':{
         const end = today;
         const start = this.dateAdapter.addCalendarDays(today, -30);
         this.updateFromToTime(start,end)
-        this.attachLabel()
+        this.attachFromtime()
+        this.attachTotime()
         return [start, end];
       }
       case 'Last 90 days': {
         const end = today;
         const start = this.dateAdapter.addCalendarDays(today, -90);
         this.updateFromToTime(start,end)
-        this.attachLabel()
+        this.attachFromtime()
+        this.attachTotime()
         return [start, end];
       }
       case 'Custom range':{
