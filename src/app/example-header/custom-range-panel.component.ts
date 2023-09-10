@@ -200,6 +200,8 @@ export class CustomRangePanelComponent<D> {
       case 'Custom range':{
         const end = today;
         const start = this.dateAdapter.addCalendarDays(today, -90);
+        this.removeElement("start-element")
+        this.removeElement("end-element")
         return [null, null];
       }
       default:

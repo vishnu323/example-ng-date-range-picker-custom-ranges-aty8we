@@ -43,6 +43,13 @@ export class AppComponent {
   }
 
   startDateChange = () =>{
+    console.log("start")
+    // this.globalValueService.setGlobalValue("Custom range")
+    
+  }
+
+  endDateChange = () =>{
+    console.log("end")
     // this.globalValueService.setGlobalValue("Custom range")
     
   }
