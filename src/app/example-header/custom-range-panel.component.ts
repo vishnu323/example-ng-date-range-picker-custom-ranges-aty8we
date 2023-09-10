@@ -46,7 +46,6 @@ export class CustomRangePanelComponent<D> {
  
   ngOnInit() {
     this.globalDataSubscription = this.globalValueService.globalValueData$.subscribe(data => {
-      
       this.globalInfoVar = data;
      
     });
@@ -123,6 +122,7 @@ export class CustomRangePanelComponent<D> {
     const endFormat = this.globalValueService.formatTime(end);
     this.globalValueService.setFromTimeValue(startFormat);
     this.globalValueService.setToTimeValue(endFormat)
+    this.timeValue = startFormat;
   }
 
   removeElement(id){
@@ -199,8 +199,8 @@ export class CustomRangePanelComponent<D> {
         return [start, end];
       }
       case 'Custom range':{
-        const end = today;
-        const start = this.dateAdapter.addCalendarDays(today, -90);
+        const start = today;
+        this.updateFromToTime(start,start)
         this.removeElement("start-element")
         this.removeElement("end-element")
         return [null, null];
