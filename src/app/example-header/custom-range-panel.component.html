@@ -11,7 +11,7 @@
   </button>
   <div id="time-picker">
     <div class="ngx-timepicker-field-example">
-      <ngx-timepicker-field [defaultTime]="timeValue"></ngx-timepicker-field>
+      <ngx-timepicker-field [defaultTime]="timeValue" (timeChanged)="onChangeHour($event)"></ngx-timepicker-field>
   </div>
   </div>
 </mat-card>

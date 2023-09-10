@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding,Output,EventEmitter } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { MatDateRangePicker } from '@angular/material/datepicker';
 import { GlobalValueService } from '../global-value.service';
@@ -33,6 +33,7 @@ export class CustomRangePanelComponent<D> {
   public timeValue: any;
   private globalDataSubscription: Subscription;
   public globalInfoVar:string;
+  @Output() timeChanged = new EventEmitter<Date>();
 
   constructor(
     private dateAdapter: DateAdapter<D>,
@@ -220,5 +221,9 @@ export class CustomRangePanelComponent<D> {
       throw new Error('date creation failed');
     }
     return today;
+  }
+
+  onChangeHour(event:any){
+    console.log(event.target.value);
   }
 }
