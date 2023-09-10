@@ -28,7 +28,9 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.attachLabel();
+    this.attachFromtime()
+    this.attachTotime()
+    
   }
   
   range = new FormGroup({
@@ -45,29 +47,22 @@ export class AppComponent {
     return formattedDate;
   }
 
-  startDateChange = () =>{
-    console.log("start")
-    // this.globalValueService.setGlobalValue("Custom range")
-    
-  }
+
 
   onDateRangeChange() {
     // Handle the date range change here
     const startDate = this.range.get('start').value;
     const endDate = this.range.get('end').value;
-
-    console.log([startDate,endDate])
-
-    if (startDate && endDate) {
-      console.log('Selected Date Range:', startDate, endDate);
+    if(startDate){
+      this.attachFromtime();
+    }
+    if(endDate){
+      this.attachTotime()
     }
   }
 
-  endDateChange = () =>{
-    console.log("end")
-    // this.globalValueService.setGlobalValue("Custom range")
-    
-  }
+ 
+
 
   removeElement(id){
     const ele = document.querySelector(`#${id}`);
@@ -76,28 +71,25 @@ export class AppComponent {
     }
   }
 
-  attachLabel(){
+  attachFromtime(){
     const startid = 'start-element';
-    const endid = 'end-element';
     const startRef = document.querySelector('.mat-date-range-input-start-wrapper');
-    const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
-
     this.removeElement(startid);
-    this.removeElement(endid)
-
     const startelement = document.createElement("div");
     startelement.setAttribute("id",startid)
     startelement.innerText = this.globalValueService.getFromTimeValue();
-
+    startRef.appendChild(startelement)
+  }
+  attachTotime(){
+    const endid = 'end-element';
+    const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
+    this.removeElement(endid)
     const endelement = document.createElement("div");
     endelement.setAttribute("id",endid)
     endelement.innerText = this.globalValueService.getToTimeValue();
-
-    startRef.appendChild(startelement)
     endRef.appendChild(endelement)
-
-
   }
+
 
   public parseRange = () =>{
     const start = this.getDateFormat(this.range.value.start);
@@ -111,9 +103,7 @@ export class AppComponent {
     return object;
   }
 
-  calendarHandler() {
-    console.log("target")
-  }
+
 
    
 }

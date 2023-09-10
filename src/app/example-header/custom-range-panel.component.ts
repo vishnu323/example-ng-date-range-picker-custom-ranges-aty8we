@@ -128,6 +128,7 @@ export class CustomRangePanelComponent<D> {
   removeElement(id){
     const ele = document.querySelector(`#${id}`);
     if(ele){
+      console.log("vishnu12345",ele)
       ele.remove();
     }
   }
@@ -141,6 +142,7 @@ export class CustomRangePanelComponent<D> {
     startelement.innerText = this.globalValueService.getFromTimeValue();
     startRef.appendChild(startelement)
   }
+  
   attachTotime(){
     const endid = 'end-element';
     const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
@@ -152,28 +154,7 @@ export class CustomRangePanelComponent<D> {
   }
 
 
-  attachLabel(){
-    const startid = 'start-element';
-    const endid = 'end-element';
-    const startRef = document.querySelector('.mat-date-range-input-start-wrapper');
-    const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
 
-    this.removeElement(startid);
-    this.removeElement(endid)
-
-    const startelement = document.createElement("div");
-    startelement.setAttribute("id",startid)
-    startelement.innerText = this.globalValueService.getFromTimeValue();
-
-    const endelement = document.createElement("div");
-    endelement.setAttribute("id",endid)
-    endelement.innerText = this.globalValueService.getToTimeValue();
-
-    startRef.appendChild(startelement)
-    endRef.appendChild(endelement)
-
-
-  }
 
   private calculateDateRange(rangeName: CustomPreset): [start: any, end: any] {
     const today = this.today;
@@ -232,7 +213,6 @@ export class CustomRangePanelComponent<D> {
         return [null, null];
       }
       default:
-      console.log(" vishnu123556")
         // exhaustiveness check;
         // rangeName has type never, if every possible value is handled in the switch cases.
         // Otherwise, the following line will result in compiler error:
