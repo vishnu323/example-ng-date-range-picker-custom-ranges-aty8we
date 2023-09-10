@@ -43,7 +43,7 @@ export class AppComponent {
   }
 
   startDateChange = () =>{
-   
+    // this.globalValueService.setGlobalValue("Custom range")
     
   }
 

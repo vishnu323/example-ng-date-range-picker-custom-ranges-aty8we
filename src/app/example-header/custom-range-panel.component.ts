@@ -124,15 +124,33 @@ export class CustomRangePanelComponent<D> {
     this.globalValueService.setToTimeValue(endFormat)
   }
 
-  attachLabel(){
-    // const startRef = document.querySelector('.mat-date-range-input-start-wrapper');
-    // const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
+  removeElement(id){
+    const ele = document.querySelector(`#${id}`);
+    if(ele){
+      ele.remove();
+    }
+  }
 
-    // startRef.textContent = startRef.textContent + 
-    // " " + this.globalValueService.getFromTimeValue()
-    // console.log("vishnu12345b",endRef.textContent)
-    // endRef.textContent = endRef.textContent + " " + this.globalValueService.getToTimeValue()
-    // console.log("vishnu12345a",endRef.textContent)
+  attachLabel(){
+    const startid = 'start-element';
+    const endid = 'end-element';
+    const startRef = document.querySelector('.mat-date-range-input-start-wrapper');
+    const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
+
+    this.removeElement(startid);
+    this.removeElement(endid)
+
+    const startelement = document.createElement("div");
+    startelement.setAttribute("id",startid)
+    startelement.innerText = this.globalValueService.getFromTimeValue();
+
+    const endelement = document.createElement("div");
+    endelement.setAttribute("id",endid)
+    endelement.innerText = this.globalValueService.getToTimeValue();
+
+    startRef.appendChild(startelement)
+    endRef.appendChild(endelement)
+
 
   }
 
