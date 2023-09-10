@@ -148,7 +148,7 @@ export class CustomRangePanelComponent<D> {
         const start = this.dateAdapter.addCalendarDays(today, -6);
         this.updateFromToTime(start,end)
         this.attachLabel()
-        return [today, today];
+        return [start, today];
       }
       case 'Last 30 days':{
         const end = today;
