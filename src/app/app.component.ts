@@ -36,7 +36,7 @@ export class AppComponent {
     const [start,end] = this.globalValueService.getHourDate(1);
     this.globalValueService.setFromTimeValue(start)
     this.globalValueService.setToTimeValue(end)
-    
+
     this.globalFromTimeSubscription = this.globalValueService.fromTimeValueData$.subscribe(data => {
       this.globalFromTimeVar = data;
     });

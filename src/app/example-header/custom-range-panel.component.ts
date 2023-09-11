@@ -54,10 +54,12 @@ export class CustomRangePanelComponent<D> {
   ngOnInit() {
     this.globalFromTimeSubscription = this.globalValueService.fromTimeValueData$.subscribe(data => {
       this.globalFromTimeVar = data;
+      this.attachFromtime()
     });
 
     this.globalToTimeSubscription = this.globalValueService.toTimeValueData$.subscribe(data => {
       this.globalToTimeVar = data;
+      this.attachTotime()
     });
     
     this.globalDataSubscription = this.globalValueService.globalValueData$.subscribe(data => {
@@ -138,9 +140,6 @@ export class CustomRangePanelComponent<D> {
   updateFromToTime(start,end){
     this.globalValueService.setFromTimeValue(start);
     this.globalValueService.setToTimeValue(end)
-
-    console.log("vishniu456",this.globalValueService.formatTime(start));
-    console.log("vishnu4578",this.globalValueService.formatTime(end))
     
   }
 
@@ -174,6 +173,11 @@ export class CustomRangePanelComponent<D> {
     endRef.appendChild(endelement)
   }
 
+
+  onTimeChange(event){
+    this.globalValueService.setFromTimeValue(this.mytime)
+    this.globalValueService.setToTimeValue(this.mytime)
+  }
 
 
 
