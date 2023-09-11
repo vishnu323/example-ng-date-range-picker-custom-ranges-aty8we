@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ExampleHeaderComponent } from './example-header/example-header.component';
 import { MatDateRangePicker ,MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { GlobalValueService } from './global-value.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,11 @@ import { GlobalValueService } from './global-value.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  private globalFromTimeSubscription: Subscription;
+  public globalFromTimeVar:any;
 
+  private globalToTimeSubscription: Subscription;
+  public globalToTimeVar:any;
 
   
   
@@ -30,6 +35,18 @@ export class AppComponent {
   ngOnInit() {
     this.attachFromtime()
     this.attachTotime()
+    this.globalFromTimeSubscription = this.globalValueService.fromTimeValueData$.subscribe(data => {
+      this.globalFromTimeVar = data;
+    });
+
+    this.globalToTimeSubscription = this.globalValueService.toTimeValueData$.subscribe(data => {
+      this.globalToTimeVar = data;
+    });
+  }
+
+  ngOnDestroy() {
+    this.globalFromTimeSubscription.unsubscribe();
+    this.globalToTimeSubscription.unsubscribe();
   }
   
   range = new FormGroup({
@@ -62,12 +79,7 @@ export class AppComponent {
     }else{
       this.removeElement("end-element")
     }
-    
-    
   }
-
- 
-
 
   removeElement(id){
     const ele = document.querySelector(`#${id}`);
@@ -82,22 +94,21 @@ export class AppComponent {
     this.removeElement(startid);
     const startelement = document.createElement("div");
     startelement.setAttribute("id",startid)
-    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getFromTimeValue())
+    const timeFormat= this.globalValueService.formatTime(this.globalFromTimeVar)
     startelement.innerText = timeFormat;
     startRef.appendChild(startelement)
   }
-  
+
   attachTotime(){
     const endid = 'end-element';
     const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
     this.removeElement(endid)
     const endelement = document.createElement("div");
     endelement.setAttribute("id",endid)
-    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getToTimeValue())
+    const timeFormat= this.globalValueService.formatTime(this.globalToTimeVar)
     endelement.innerText = timeFormat;
     endRef.appendChild(endelement)
   }
-
 
   public parseRange = () =>{
     const start = this.getDateFormat(this.range.value.start);

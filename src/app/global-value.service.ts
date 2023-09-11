@@ -8,8 +8,14 @@ import { BehaviorSubject } from 'rxjs';
 export class GlobalValueService {
   private globalValue = new BehaviorSubject<string>("Last 1 Hour");
   globalValueData$ = this.globalValue.asObservable();
-  private fromTimeStr : any =this.getHourDate(1)[0];
-  private toTimeStr : any = this.getHourDate(1)[1];
+
+
+  private fromTimeStr = new BehaviorSubject<any>(this.getHourDate(1)[0])
+  fromTimeValueData$ = this.fromTimeStr.asObservable();
+  private toTimeStr = new BehaviorSubject<any>(this.getHourDate(1)[1])
+  toTimeValueData$  = this.toTimeStr.asObservable();
+  // private fromTimeStr : any =this.getHourDate(1)[0];
+  // private toTimeStr : any = this.getHourDate(1)[1];
   private startDate : any = new Date();
   private endDate: any = new Date();
 
@@ -29,14 +35,14 @@ export class GlobalValueService {
   }
 
   setFromTimeValue(time : any){
-    this.fromTimeStr = time
+    this.fromTimeStr.next(time)
   }
   getToTimeValue(){
     return this.toTimeStr;
   }
 
   setToTimeValue(time : any){
-    this.toTimeStr = time
+    this.toTimeStr.next(time)
   }
 
   getHourDate(hour:number){

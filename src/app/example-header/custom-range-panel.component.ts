@@ -33,6 +33,11 @@ export class CustomRangePanelComponent<D> {
   public timeValue: any;
   private globalDataSubscription: Subscription;
   public globalInfoVar:string;
+  private globalFromTimeSubscription: Subscription;
+  public globalFromTimeVar:any;
+
+  private globalToTimeSubscription: Subscription;
+  public globalToTimeVar:any;
   @Output() timeChanged = new EventEmitter<Date>();
   timepickerVisible = true;
   mytime: Date = new Date();
@@ -47,14 +52,25 @@ export class CustomRangePanelComponent<D> {
   }
  
   ngOnInit() {
+    this.globalFromTimeSubscription = this.globalValueService.fromTimeValueData$.subscribe(data => {
+      this.globalFromTimeVar = data;
+    });
+
+    this.globalToTimeSubscription = this.globalValueService.toTimeValueData$.subscribe(data => {
+      this.globalToTimeVar = data;
+    });
+    
     this.globalDataSubscription = this.globalValueService.globalValueData$.subscribe(data => {
       this.globalInfoVar = data;
-      this.mytime = this.globalValueService.getFromTimeValue();
+      this.mytime = this.globalFromTimeVar;
     });
+    
   }
 
   ngOnDestroy() {
     this.globalDataSubscription.unsubscribe();
+    this.globalFromTimeSubscription.unsubscribe();
+    this.globalToTimeSubscription.unsubscribe();
   }
 
   updateGlobalValue(newValue: any) {
@@ -142,7 +158,7 @@ export class CustomRangePanelComponent<D> {
     this.removeElement(startid);
     const startelement = document.createElement("div");
     startelement.setAttribute("id",startid)
-    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getFromTimeValue())
+    const timeFormat= this.globalValueService.formatTime(this.globalFromTimeVar)
     startelement.innerText = timeFormat;
     startRef.appendChild(startelement)
   }
@@ -153,7 +169,7 @@ export class CustomRangePanelComponent<D> {
     this.removeElement(endid)
     const endelement = document.createElement("div");
     endelement.setAttribute("id",endid)
-    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getToTimeValue())
+    const timeFormat= this.globalValueService.formatTime(this.globalToTimeVar)
     endelement.innerText = timeFormat
     endRef.appendChild(endelement)
   }
