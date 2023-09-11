@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule ,FormsModule} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -14,6 +14,7 @@ import { ExampleHeaderComponent } from './example-header/example-header.componen
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { DatePipe } from '@angular/common'; 
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     MatButtonModule,
     MatCardModule,
     NgxMaterialTimepickerModule,
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    FormsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

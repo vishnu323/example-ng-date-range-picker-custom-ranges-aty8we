@@ -35,7 +35,7 @@ export class CustomRangePanelComponent<D> {
   public globalInfoVar:string;
   @Output() timeChanged = new EventEmitter<Date>();
   timepickerVisible = true;
-  mytime: Date = new Date(1615478393);
+  mytime: Date = new Date();
 
   constructor(
     private dateAdapter: DateAdapter<D>,

@@ -10,8 +10,6 @@
     {{ item }}
   </button>
   <div id="time-picker">
-    <div class="ngx-timepicker-field-example">
-      <ngx-timepicker-field [defaultTime]="timeValue" (timeChanged)="onChangeHour($event)"></ngx-timepicker-field>
-  </div>
+    <timepicker [(ngModel)]="mytime" [showMeridian]="true"></timepicker>
   </div>
 </mat-card>
