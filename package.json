@@ -18,6 +18,7 @@
     "@types/luxon": ">= 1.11.1",
     "@types/node": "14.11.8",
     "luxon": ">= 1.24.0",
+    "ngx-bootstrap": "6.0.0",
     "ngx-material-timepicker": "3.3.1",
     "rxjs": "6.6.3",
     "tslib": "2.0.3",
