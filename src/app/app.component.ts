@@ -33,8 +33,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.attachFromtime()
-    this.attachTotime()
+    const [start,end] = this.globalValueService.getHourDate(1);
+    this.globalValueService.setFromTimeValue(start)
+    this.globalValueService.setToTimeValue(end)
+    
     this.globalFromTimeSubscription = this.globalValueService.fromTimeValueData$.subscribe(data => {
       this.globalFromTimeVar = data;
     });
@@ -47,6 +49,11 @@ export class AppComponent {
   ngOnDestroy() {
     this.globalFromTimeSubscription.unsubscribe();
     this.globalToTimeSubscription.unsubscribe();
+  }
+
+  ngAfterViewInit() {
+    this.attachFromtime()
+    this.attachTotime()
   }
   
   range = new FormGroup({
