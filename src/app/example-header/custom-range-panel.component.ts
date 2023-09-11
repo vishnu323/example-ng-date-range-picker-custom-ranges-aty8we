@@ -43,13 +43,13 @@ export class CustomRangePanelComponent<D> {
     private globalValueService: GlobalValueService
     
   ) {
-   this.timeValue = this.globalValueService.getFromTimeValue();
+   
   }
  
   ngOnInit() {
     this.globalDataSubscription = this.globalValueService.globalValueData$.subscribe(data => {
       this.globalInfoVar = data;
-     
+      this.mytime = this.globalValueService.getFromTimeValue();
     });
   }
 
@@ -120,11 +120,12 @@ export class CustomRangePanelComponent<D> {
     }
   
   updateFromToTime(start,end){
-    const startFormat = this.globalValueService.formatTime(start);
-    const endFormat = this.globalValueService.formatTime(end);
-    this.globalValueService.setFromTimeValue(startFormat);
-    this.globalValueService.setToTimeValue(endFormat)
-    this.timeValue = startFormat;
+    this.globalValueService.setFromTimeValue(start);
+    this.globalValueService.setToTimeValue(end)
+
+    console.log("vishniu456",this.globalValueService.formatTime(start));
+    console.log("vishnu4578",this.globalValueService.formatTime(end))
+    
   }
 
   removeElement(id){
@@ -141,7 +142,8 @@ export class CustomRangePanelComponent<D> {
     this.removeElement(startid);
     const startelement = document.createElement("div");
     startelement.setAttribute("id",startid)
-    startelement.innerText = this.globalValueService.getFromTimeValue();
+    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getFromTimeValue())
+    startelement.innerText = timeFormat;
     startRef.appendChild(startelement)
   }
 
@@ -151,7 +153,8 @@ export class CustomRangePanelComponent<D> {
     this.removeElement(endid)
     const endelement = document.createElement("div");
     endelement.setAttribute("id",endid)
-    endelement.innerText = this.globalValueService.getToTimeValue();
+    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getToTimeValue())
+    endelement.innerText = timeFormat
     endRef.appendChild(endelement)
   }
 
@@ -208,9 +211,9 @@ export class CustomRangePanelComponent<D> {
         return [start, end];
       }
       case 'Custom range':{
-        console.log("vishnu456")
         const start = today;
         this.updateFromToTime(start,start)
+        this.mytime = new Date();
         this.removeElement("start-element")
         this.removeElement("end-element")
         return [null, null];

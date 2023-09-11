@@ -82,16 +82,19 @@ export class AppComponent {
     this.removeElement(startid);
     const startelement = document.createElement("div");
     startelement.setAttribute("id",startid)
-    startelement.innerText = this.globalValueService.getFromTimeValue();
+    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getFromTimeValue())
+    startelement.innerText = timeFormat;
     startRef.appendChild(startelement)
   }
+  
   attachTotime(){
     const endid = 'end-element';
     const endRef = document.querySelector('.mat-date-range-input-end-wrapper');
     this.removeElement(endid)
     const endelement = document.createElement("div");
     endelement.setAttribute("id",endid)
-    endelement.innerText = this.globalValueService.getToTimeValue();
+    const timeFormat= this.globalValueService.formatTime(this.globalValueService.getToTimeValue())
+    endelement.innerText = timeFormat;
     endRef.appendChild(endelement)
   }
 
