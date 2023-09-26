@@ -1,34 +1,49 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { DatePipe } from '@angular/common';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+
+const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [DatePipe], // Add DatePipe as a provider
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class AppComponent {
-  date = new FormControl();
+  date = new FormControl(new Date());
 
-  constructor(private datePipe: DatePipe) {}
+  constructor() {}
 
-  chosenYearHandler(normalizedYear: Date) {
+  chosenYearHandler(normalizedYear: any) {
     const ctrlValue = this.date.value || new Date();
-    ctrlValue.setFullYear(normalizedYear.getFullYear());
+    ctrlValue.setFullYear(normalizedYear.year());
     this.date.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Date, dp: MatDatepicker<Date>) {
+  chosenMonthHandler(normalizedMonth: any, datepicker: MatDatepicker<any>) {
     const ctrlValue = this.date.value || new Date();
-    ctrlValue.setMonth(normalizedMonth.getMonth());
+    ctrlValue.setMonth(normalizedMonth.month());
     this.date.setValue(ctrlValue);
-    dp.close();
-  }
-
-  // Format the date for display in the input field
-  formatDate(date: Date): string {
-    return this.datePipe.transform(date, 'MM/yyyy') || '';
+    datepicker.close();
   }
 }
