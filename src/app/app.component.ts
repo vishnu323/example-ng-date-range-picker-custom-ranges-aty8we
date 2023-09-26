@@ -31,18 +31,17 @@ const MY_FORMATS = {
 })
 export class AppComponent {
   date = new FormControl(new Date());
-  @ViewChild('picker') picker: MatDatepicker<Date>; 
 
   constructor() {}
 
-  // Handler for year selection
+
   chosenYearHandler(normalizedYear: any) {
     const ctrlValue = this.date.value || new Date();
     ctrlValue.setFullYear(normalizedYear.year());
     this.date.setValue(ctrlValue);
   }
 
-  // Handler for month selection
+
   chosenMonthHandler(normalizedMonth: any,picker : MatDatepicker<any>) {
     const ctrlValue = this.date.value || new Date();
     ctrlValue.setMonth(normalizedMonth.month());
@@ -51,14 +50,15 @@ export class AppComponent {
 
   }
 
-  // Function to navigate to the previous year
+ 
   previousYear() {
     const selectedDate = this.date.value || new Date();
     selectedDate.setFullYear(selectedDate.getFullYear() - 1);
     this.date.setValue(selectedDate);
+    
   }
 
-  // Function to navigate to the next year
+
   nextYear() {
     const selectedDate = this.date.value || new Date();
     selectedDate.setFullYear(selectedDate.getFullYear() + 1);

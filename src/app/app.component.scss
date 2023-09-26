@@ -12,9 +12,8 @@
 
 }
 
-::ng-deep .mat-calendar-previous-button.mat-icon-button.mat-button-base{
-  position: absolute;
-  left: 0px;
+::ng-deep .mat-calendar-previous-button.mat-icon-button.mat-button-base,::ng-deep .mat-calendar-next-button.mat-icon-button.mat-button-base{
+  display: none;
 }
 
 ::ng-deep .mat-focus-indicator.mat-calendar-period-button.mat-button.mat-button-base .mat-button-wrapper{
@@ -22,7 +21,18 @@
   left:98px;
 }
 
-.custom-arrows{
+.mat-year-month-container .custom-arrows{
   position: absolute;
   z-index: 99999;
+}
+
+.mat-year-month-container .custom-arrows .mat-year-month-prev{
+  color:blue;
+}
+
+.mat-year-month-container .custom-arrows .mat-year-month-next{
+  color:blue;
+  position: absolute;
+  left: 255px;
+
 }
