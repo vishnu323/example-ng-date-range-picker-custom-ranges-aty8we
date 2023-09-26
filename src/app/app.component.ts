@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -41,6 +41,7 @@ export class AppComponent {
   }
 
   chosenMonthHandler(normalizedMonth: any, datepicker: MatDatepicker<any>) {
+
     const ctrlValue = this.date.value || new Date();
     ctrlValue.setMonth(normalizedMonth.month());
     this.date.setValue(ctrlValue);
