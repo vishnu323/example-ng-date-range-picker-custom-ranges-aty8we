@@ -34,14 +34,18 @@ export class AppComponent {
 
   constructor() {}
 
+  updateInfo(year: any){
+    const header = document.querySelector(".mat-focus-indicator.mat-calendar-period-button.mat-button.mat-button-base .mat-button-wrapper");
+    const subHeaderRef = document.querySelector(".mat-calendar-body-label");
+    if(header){
+      header.innerHTML = year
+    }
+    if(subHeaderRef){
+      subHeaderRef.innerHTML = year;
+    }
+   
 
-  chosenYearHandler(normalizedYear: any) {
-    const ctrlValue = this.date.value || new Date();
-    ctrlValue.setFullYear(normalizedYear.year());
-    this.date.setValue(ctrlValue);
   }
-
-
   chosenMonthHandler(normalizedMonth: any,picker : MatDatepicker<any>) {
     const ctrlValue = this.date.value || new Date();
     ctrlValue.setMonth(normalizedMonth.month());
@@ -53,7 +57,9 @@ export class AppComponent {
  
   previousYear() {
     const selectedDate = this.date.value || new Date();
-    selectedDate.setFullYear(selectedDate.getFullYear() - 1);
+    const prevYear = selectedDate.getFullYear() - 1;
+    selectedDate.setFullYear(prevYear);
+    this.updateInfo(prevYear)
     this.date.setValue(selectedDate);
     
   }
@@ -61,7 +67,9 @@ export class AppComponent {
 
   nextYear() {
     const selectedDate = this.date.value || new Date();
-    selectedDate.setFullYear(selectedDate.getFullYear() + 1);
+    const nextYear = selectedDate.getFullYear() + 1;
+    selectedDate.setFullYear(nextYear);
+    this.updateInfo(nextYear)
     this.date.setValue(selectedDate);
   }
 }
