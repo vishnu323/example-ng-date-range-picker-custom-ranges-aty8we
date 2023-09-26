@@ -31,6 +31,10 @@ const MY_FORMATS = {
 })
 export class AppComponent {
   date = new FormControl(new Date());
+  minYear : number = 2022;
+  maxYear : number = 2025;
+  disableMinYear : boolean = false;
+  disableMaxyear : boolean = false;
 
   constructor() {}
 
@@ -58,9 +62,14 @@ export class AppComponent {
   previousYear() {
     const selectedDate = this.date.value || new Date();
     const prevYear = selectedDate.getFullYear() - 1;
-    selectedDate.setFullYear(prevYear);
-    this.updateInfo(prevYear)
-    this.date.setValue(selectedDate);
+    if(prevYear < this.minYear){
+      this.disableMinYear = true;
+    }else{
+      selectedDate.setFullYear(prevYear);
+      this.updateInfo(prevYear)
+      this.date.setValue(selectedDate);
+    }
+    
     
   }
 
@@ -68,8 +77,13 @@ export class AppComponent {
   nextYear() {
     const selectedDate = this.date.value || new Date();
     const nextYear = selectedDate.getFullYear() + 1;
-    selectedDate.setFullYear(nextYear);
-    this.updateInfo(nextYear)
-    this.date.setValue(selectedDate);
+    if(nextYear > this.maxYear){
+      this.disableMaxyear = true;
+    }else{
+      selectedDate.setFullYear(nextYear);
+      this.updateInfo(nextYear)
+      this.date.setValue(selectedDate);
+    }
+    
   }
 }
