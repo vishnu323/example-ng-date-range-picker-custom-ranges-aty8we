@@ -5,3 +5,19 @@
 .example-month-picker .mat-calendar-arrow {
   display: none;
 }
+
+::ng-deep .mat-calendar-invert{
+  color:red !important;
+  display: none !important;
+
+}
+
+::ng-deep .mat-calendar-previous-button.mat-icon-button.mat-button-base{
+  position: absolute;
+  left: 0px;
+}
+
+::ng-deep .mat-focus-indicator.mat-calendar-period-button.mat-button.mat-button-base .mat-button-wrapper{
+  position: relative;
+  left:98px;
+}
