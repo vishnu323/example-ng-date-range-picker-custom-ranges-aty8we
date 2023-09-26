@@ -2,39 +2,28 @@ import { Component,ViewChild } from '@angular/core';
 import {MatDatepicker} from '@angular/material/datepicker';
 import {FormControl} from '@angular/forms';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  // startDate = new Date(); // The initial date to show in the calendar
-  // selectedYear: number = this.startDate.getFullYear();
-
-  // onSelectedChange(event: any) {
-  //   // Handle the selected date change here
-  //   if (event) {
-  //     this.selectedYear = event.getFullYear();
-  //     console.log(`Selected Year: ${this.selectedYear}`);
-  //   }
-  // }
-
-  // previousYear() {
-  //   // Navigate to the previous year
-  //   this.selectedYear -= 1;
-  // }
-
-  // nextYear() {
-  //   // Navigate to the next year
-  //   this.selectedYear += 1;
-  // }
-
+ 
 
   date = new FormControl(new Date());
-
-  get selectedYearAndMonth(): Date {
-    return this.date.value;
-  }
 
   chosenYearHandler(normalizedYear: Date) {
     const ctrlValue = this.date.value;
@@ -42,10 +31,11 @@ export class AppComponent {
     this.date.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Date) {
+  chosenMonthHandler(normalizedMonth: Date,picker :MatDatepicker<Date> ) {
     const ctrlValue = this.date.value;
     ctrlValue.setMonth(normalizedMonth.getMonth());
     this.date.setValue(ctrlValue);
+    picker.close()
   }
 
    
