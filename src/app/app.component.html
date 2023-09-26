@@ -1,20 +1,24 @@
-<mat-form-field appearance="fill" (click)="handleDateRangeInputClick()">
-  <mat-label>Enter a date range</mat-label>
-  <mat-date-range-input [formGroup]="range" [rangePicker]="picker" 
-  >
-    <input matStartDate formControlName="start" placeholder="Start date" (dateChange)="onDateRangeChange()"/>
-    <input matEndDate formControlName="end" placeholder="End date" (dateChange)="onDateRangeChange()"/>
-  </mat-date-range-input>
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker
-    #picker
-    [calendarHeaderComponent]="ExampleHeaderComponent"
-  ></mat-date-range-picker>
+<!-- <mat-form-field>
+  <input matInput [matDatepicker]="picker" (click)="picker.open()" [value]="selectedYear">
+  <mat-datepicker #picker [startView]="'year'" [startAt]="startDate" (selectedChanged)="onSelectedChange($event)">
+    <mat-calendar [startAt]="startDate">
+      <mat-calendar-header>
+        <button mat-button type="button" (click)="previousYear()">Previous</button>
+        <div>{{ selectedYear }}</div>
+        <button mat-button type="button" (click)="nextYear()">Next</button>
+      </mat-calendar-header>
+    </mat-calendar>
+  </mat-datepicker>
+</mat-form-field> -->
+
+<mat-form-field>
+  <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
+  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp
+                  startView="year"
+                  (yearSelected)="chosenYearHandler($event)"
+                  (monthSelected)="chosenMonthHandler($event)"
+                  panelClass="example-month-picker">
+                 
+  </mat-datepicker>
 </mat-form-field>
-
-<p>Selected range: {{ parseRange() | json }}</p>
-
-
-
-
-

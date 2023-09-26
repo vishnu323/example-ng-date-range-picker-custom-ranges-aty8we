@@ -14,6 +14,7 @@ import { ExampleHeaderComponent } from './example-header/example-header.componen
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { DatePipe } from '@angular/common'; 
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     MatCardModule,
     NgxMaterialTimepickerModule,
     TimepickerModule.forRoot(),
-    FormsModule
+    FormsModule,
+    MatSelectModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
