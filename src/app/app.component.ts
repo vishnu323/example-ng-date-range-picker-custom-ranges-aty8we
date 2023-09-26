@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -31,20 +31,37 @@ const MY_FORMATS = {
 })
 export class AppComponent {
   date = new FormControl(new Date());
+  @ViewChild('picker') picker: MatDatepicker<Date>; 
 
   constructor() {}
 
+  // Handler for year selection
   chosenYearHandler(normalizedYear: any) {
     const ctrlValue = this.date.value || new Date();
     ctrlValue.setFullYear(normalizedYear.year());
     this.date.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: any, datepicker: MatDatepicker<any>) {
-
+  // Handler for month selection
+  chosenMonthHandler(normalizedMonth: any,picker : MatDatepicker<any>) {
     const ctrlValue = this.date.value || new Date();
     ctrlValue.setMonth(normalizedMonth.month());
     this.date.setValue(ctrlValue);
-    datepicker.close();
+    picker.close()
+
+  }
+
+  // Function to navigate to the previous year
+  previousYear() {
+    const selectedDate = this.date.value || new Date();
+    selectedDate.setFullYear(selectedDate.getFullYear() - 1);
+    this.date.setValue(selectedDate);
+  }
+
+  // Function to navigate to the next year
+  nextYear() {
+    const selectedDate = this.date.value || new Date();
+    selectedDate.setFullYear(selectedDate.getFullYear() + 1);
+    this.date.setValue(selectedDate);
   }
 }

@@ -1,11 +1,18 @@
-<div class="date-year-container">
+<div class="mat-year-month-container">
   <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Month and Year" [formControl]="date" [value]="date">
+    <input matInput [matDatepicker]="picker" placeholder="Month and Year" [formControl]="date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker
                     startView="year"
-                    (monthSelected)="chosenMonthHandler($event, picker)"
-                    panelClass="example-month-picker">
+                    (yearSelected)="chosenYearHandler($event)"
+                    (monthSelected)="chosenMonthHandler($event,picker)">
     </mat-datepicker>
   </mat-form-field>
+  <div *ngIf="picker.opened" class="custom-arrows">
+    <button mat-icon-button (click)="previousYear()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-icon-button (click)="nextYear()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
 </div>
