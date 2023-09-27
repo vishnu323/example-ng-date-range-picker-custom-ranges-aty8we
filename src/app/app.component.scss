@@ -19,6 +19,7 @@
 ::ng-deep .mat-focus-indicator.mat-calendar-period-button.mat-button.mat-button-base .mat-button-wrapper{
   position: relative;
   left:98px;
+  pointer-events: none;
 }
 
 .mat-year-month-container .custom-arrows{
